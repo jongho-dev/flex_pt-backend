@@ -1,20 +1,32 @@
-const mongoose = require("mongoose");
+const { MongoClient } = require("mongodb");
 const connection = require("./connection.json");
 
 const uri = connection.mongoURL;
+const dbName = "flexpt";
+
+const client = new MongoClient(uri);
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(uri, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    });
-
-    console.log("MongoDB Connected...");
-  } catch (error) {
-    console.error(error.message);
-    process.exit(1);
+    await client.connect();
+    console.log("Connected to MongoDB");
+    const db = client.db(dbName);
+  } catch (err) {
+    console.log(err);
   }
 };
 
-module.exports = connectDB;
+const insertData = async () => {
+  try {
+    const usersCollection = client.db(dbName).collection("users");
+    const result = await usersCollection.insertOne({
+      name: "박연세",
+      age: 30,
+    });
+    console.log("성공");
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { connectDB, insertData };
