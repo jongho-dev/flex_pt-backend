@@ -1,6 +1,7 @@
 const express = require("express");
 const { connectDB, insertData, findData, idCheck } = require("./db");
 var cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
@@ -36,4 +37,4 @@ app.post("/signupidcheck", async (req, res) => {
   res.send(rst);
 });
 
-app.listen(5000, () => console.log("5000번 포트에서 대기중"));
+app.listen(4000, () => console.log("4000번 포트에서 대기중"));
