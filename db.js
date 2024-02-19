@@ -20,8 +20,11 @@ const insertData = async () => {
   try {
     const usersCollection = client.db("flexpt").collection("users");
     const result = await usersCollection.insertOne({
+      id: "test1",
+      pw: "test2",
       name: "박연세",
-      age: 30,
+      phone: "010-1234-5678",
+      birth: "991010",
     });
     console.log("성공");
   } catch (err) {
@@ -29,10 +32,16 @@ const insertData = async () => {
   }
 };
 
-const findData = async () => {
+const findData = async (id, pw) => {
   const usersCollection = client.db("flexpt").collection("users");
-  var cursor = await usersCollection.findOne({ name: "박연세" });
+  var cursor = await usersCollection.findOne({ id: id, password: pw });
   console.log(cursor);
 };
 
-module.exports = { connectDB, insertData, findData };
+const idCheck = async (id) => {
+  const usersCollection = client.db("flexpt").collection("users");
+  var cursor = await usersCollection.findOne({ id: id });
+  return cursor != null;
+};
+
+module.exports = { connectDB, insertData, findData, idCheck };
