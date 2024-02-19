@@ -1,7 +1,6 @@
 const express = require("express");
 const { connectDB, insertData, findData, idCheck } = require("./db");
 var cors = require("cors");
-require("dotenv").config();
 
 const app = express();
 
@@ -15,7 +14,6 @@ app.get("/", (req, res) => {
 
 app.get("/cat", (req, res) => {
   res.send("hello cat");
-  console.log(process.env.DB_URL);
 });
 
 connectDB();

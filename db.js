@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
-const connection = require("./connection.json");
+require("dotenv").config();
 
-const uri = connection.mongoURL;
+const uri = process.env.DB_URL;
 const dbName = "flexpt";
 const client = new MongoClient(uri);
 var db;
