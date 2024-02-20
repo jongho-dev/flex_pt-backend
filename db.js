@@ -16,16 +16,10 @@ const connectDB = async () => {
   }
 };
 
-const insertData = async () => {
+const insertData = async (data) => {
   try {
     const usersCollection = client.db("flexpt").collection("users");
-    const result = await usersCollection.insertOne({
-      id: "test1",
-      pw: "test2",
-      name: "박연세",
-      phone: "010-1234-5678",
-      birth: "991010",
-    });
+    const result = await usersCollection.insertOne(data);
     console.log("성공");
   } catch (err) {
     console.log(err);

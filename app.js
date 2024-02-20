@@ -30,11 +30,17 @@ app.post("/login", (req, res) => {
   findData();
 });
 
-// 회원가입
+// 회원가입 관련
+//// 아이디 중복체크
 app.post("/signupidcheck", async (req, res) => {
   const result = await req.body["id"];
   const rst = await idCheck(result);
   res.send(rst);
+});
+
+//// 회원가입 완료
+app.post("/signupdone", (req, res) => {
+  insertData(req.body);
 });
 
 app.listen(4000, () => console.log("4000번 포트에서 대기중"));
